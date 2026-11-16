@@ -1,6 +1,6 @@
 # Oratile Masetla — Portfolio
 
-**Live:** https://oratile-masetla.vercel.app
+**Live:** https://oratile-masetla-v2.vercel.app
 
 Personal portfolio of **Oratile (Ora) Masetla**, software engineer at WeThinkCode_ and Richfield IT graduate:
 Java full-stack, cybersecurity, cloud and data.
