@@ -1,0 +1,94 @@
+@import "tailwindcss";
+@import "lenis/dist/lenis.css";
+
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
+@theme inline {
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-hand: "Caveat", "Comic Sans MS", cursive;
+
+  --color-canvas: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface2: var(--surface2);
+  --color-ink: var(--ink);
+  --color-pink: var(--pink);
+  --color-pinkdeep: var(--pinkdeep);
+  --color-lilac: var(--lilac);
+  --color-butter: var(--butter);
+  --color-mint: var(--mint);
+  --color-sky: var(--sky);
+}
+
+/* Light: blush paper, plum ink, hot pink. Flat colours only. */
+:root,
+[data-theme="light"] {
+  color-scheme: light;
+  --bg: #fff7f9;
+  --surface: #ffe8f0;
+  --surface2: #fdd8e6;
+  --ink: #2a1a23;
+  --pink: #ff4f9a;
+  --pinkdeep: #d61f6e;
+  --lilac: #cbb7ff;
+  --butter: #ffdf86;
+  --mint: #b5ead1;
+  --sky: #bfe0ff;
+  --onpink: #ffffff;
+}
+
+/* Dark: deep plum night, same family of colours. */
+[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #1a1117;
+  --surface: #271a22;
+  --surface2: #34222d;
+  --ink: #fbeef4;
+  --pink: #ff6fae;
+  --pinkdeep: #ff8fc1;
+  --lilac: #9c86e6;
+  --butter: #e9c460;
+  --mint: #6fcaa3;
+  --sky: #6ea9e0;
+  --onpink: #1a1117;
+}
+
+html { scroll-padding-top: 88px; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  transition: background-color .5s ease, color .5s ease;
+}
+
+* { box-sizing: border-box; }
+::selection { background: var(--pink); color: var(--onpink); }
+:focus-visible { outline: 2px solid var(--pink); outline-offset: 3px; border-radius: 6px; }
+
+/* Handwritten accents sit a little looser and larger. */
+.hand { font-family: var(--font-hand); font-weight: 600; letter-spacing: 0.01em; }
+
+/* Highlighter-style mark behind a word (solid, not a gradient). */
+.mark { box-shadow: inset 0 -0.38em 0 var(--butter); }
+[data-theme="dark"] .mark { box-shadow: inset 0 -0.38em 0 color-mix(in oklab, var(--butter) 55%, transparent); }
+
+.marquee { animation: marquee 38s linear infinite; }
+@keyframes marquee { to { transform: translateX(-50%); } }
+@keyframes progress { from { width: 0; } to { width: 100%; } }
+@keyframes floaty { 0%, 100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-10px) rotate(4deg); } }
+.floaty { animation: floaty 6s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee, .floaty { animation: none; }
+}
+
+@media print {
+  @page { size: A4 portrait; margin: 0; }
+  html { font-size: 12.5px; }
+  body { background: #fff; }
+  .resume-page, .resume-page * { background: transparent !important; color: #000 !important; box-shadow: none !important; }
+  .resume-page { min-height: auto !important; padding: 14mm 15mm !important; }
+  .resume-toolbar, nav, .no-print { display: none !important; }
+  .resume-section { break-inside: avoid; margin-top: 5mm !important; }
+}
